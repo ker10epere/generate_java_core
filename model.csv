@@ -1,0 +1,9 @@
+columnName,dataType
+id,Long
+history_id,Long
+date,LocalDateTime
+name,String
+mobile,String
+reference_number,String
+remarks,String
+status,String

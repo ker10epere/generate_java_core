@@ -1,0 +1,23 @@
+{
+  "name": "sql-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node-dev --transpile-only src/index.ts",
+    "repo": "ts-node-dev --transpile-only src/create-repositories/index.ts",
+    "model": "ts-node-dev --transpile-only src/create-model/index.ts",
+    "coa": "ts-node-dev --transpile-only --respawn --clear src/coalesce/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "csv-parse": "^5.0.4",
+    "fs-extra": "^10.1.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.13"
+  }
+}
