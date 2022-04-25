@@ -32,11 +32,9 @@ ${placeHolderValues.join('\n')}
         try (Connection cn = getConnection(); PreparedStatement ps = cn.prepareStatement(sb.toString());) {
             SetPreparedStatement.set(ps, values);
             sql(ps);
-            ps.execute();
-            rs = ps.getGeneratedKeys();
-            while (rs.next()) {
-                id = rs.getLong("id");
-            }
+            rs = ps.executeQuery();
+            rs.next();
+            id = rs.getLong("id");
         } catch (Throwable e) {
             String throwables = ThrowableUtils.stringifyThrowables(e.getSuppressed());
             error(throwables);
