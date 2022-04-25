@@ -1,28 +1,22 @@
+import { getRepositoryImplName, getRepositoryName } from '../nameUtils'
+import { State } from '../State'
 import { list } from './list'
+import { updateWithResult } from './updateWithResult'
 
-export const classImpl = (
-  properties: Properties,
-  columnNamesJoined: string,
-  findIsPresentJoined: string,
-  rsGetJoined: string,
-  camelCasedPropertiesJoined: string
-) => {
-  const repoList = list(
-    properties,
-    columnNamesJoined,
-    findIsPresentJoined,
-    rsGetJoined,
-    camelCasedPropertiesJoined
-  )
-  return `
-    public class ${properties.className}RepositoryImpl extends AbstractRepositoryImpl<${properties.className}> implements ${properties.className}Repository {
-    
-      public ${properties.className}RepositoryImpl(String tableName,DatabaseManager databaseManager, Logger logger) {
-          super(${properties.className}.class,tableName, databaseManager, logger);
-      }
-    
-     ${repoList}
-    
+export const classImpl = (state: State, props: Properties): string => {
+  const { className, tableName } = props
+  const repositoryName = getRepositoryName(className)
+  const repositoryImplName = getRepositoryImplName(className)
+
+  return `public class ${repositoryImplName} extends AbstractRepositoryImpl< ${className} > implements ${repositoryName} {
+
+    public ${repositoryImplName}(String tableName,DatabaseManager databaseManager, Logger logger) {
+        super(${className}.class,tableName, databaseManager, logger);
     }
-    `
+    
+    ${list(state, props)}
+
+    ${updateWithResult(state, props)}
+}
+  `
 }

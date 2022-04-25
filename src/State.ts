@@ -5,9 +5,17 @@ export class State {
   private _setters: string[] = []
   private _getters: string[] = []
   private _optionals: string[] = []
+
+  private _optionalNames: string[] = []
+
+  private _propertyNames: string[] = []
+  private _dataTypes: string[] = []
+
+  private _getterNames: string[] = []
+
   private _length: number = 0
 
-  public constructor(data: Data[]) {
+  constructor(data: Data[]) {
     data.forEach((v) => {
       const column = v.columnName
       const dataType = v.dataType
@@ -37,6 +45,12 @@ export class State {
       this._getters.push(getterMethod)
       this._setters.push(setterMethod)
       this._optionals.push(optionalMethod)
+
+      this._optionalNames.push(optionalName)
+      this._propertyNames.push(propertyName)
+      this._dataTypes.push(dataType)
+
+      this._getterNames.push(`${getterName}`)
     })
   }
   public get columns(): string[] {
@@ -53,6 +67,18 @@ export class State {
   }
   public get optionals(): string[] {
     return this._optionals
+  }
+  public get optionalNames(): string[] {
+    return this._optionalNames
+  }
+  public get propertyNames(): string[] {
+    return this._propertyNames
+  }
+  public get dataTypes(): string[] {
+    return this._dataTypes
+  }
+  public get getterNames(): string[] {
+    return this._getterNames
   }
   public get length(): number {
     return this._length

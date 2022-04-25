@@ -5,6 +5,8 @@ import { coalesce } from './repository/coalesce'
 import { outputFileSync } from 'fs-extra'
 import { State } from './State'
 import { saveModel } from './model'
+import { saveRepository } from './repository'
+import saveService from './service'
 
 const properties = JSON.parse(
   readFileSync('properties.json', 'utf8')
@@ -20,13 +22,6 @@ const databaseColumns: Data[] = parse(columns, {
 
 const state = new State(databaseColumns)
 
-// saveModel(state, properties)
-
-// console.log(state.columns)
-// console.log(state.properties)
-// console.log(state.getters)
-// console.log(state.setters)
-// console.log(state.optionals)
-// saveRepo(databaseColumns, properties)
-// saveClass(databaseColumns, properties)
-// saveService(properties)
+saveModel(state, properties)
+saveRepository(state, properties)
+saveService(properties)

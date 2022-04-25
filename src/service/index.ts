@@ -1,27 +1,15 @@
 import { join } from 'path'
 import fs from 'fs-extra'
+import { serviceImplPath, servicePath } from '../dirUtils'
+import { classImpl } from './classImpl'
+import { serviceInterface } from './serviceInterface'
 
-export default function saveService(properties: Properties) {
-  const serviceImplTemplate = `
-  public class ${properties.className}ServiceImpl extends AbstractServiceImpl<${properties.className}> implements ${properties.className}Service {
+export default function saveService(props: Properties) {
+  const { className } = props
 
-    private final ${properties.className}Repository repository;
+  const service = serviceInterface(props)
+  const serviceImpl = classImpl(props)
 
-    public ${properties.className}ServiceImpl(String tableName, DatabaseManager databaseManager, Logger logger) {
-        super(new ${properties.className}RepositoryImpl(tableName, databaseManager, logger));
-        this.repository = (${properties.className}Repository) super.repository;
-    }
-
-}
-  `
-  const outDirPath = join(__dirname, '..', `/generated/service/`)
-  fs.outputFileSync(
-    join(outDirPath, `${properties.fileClassName}ServiceImpl.java`),
-    serviceImplTemplate
-  )
-  fs.outputFileSync(
-    join(outDirPath, `${properties.fileClassName}Service.java`),
-    `public interface ${properties.className}Service extends AbstractService<${properties.className}> {
-  }`
-  )
+  fs.outputFileSync(serviceImplPath(className), serviceImpl)
+  fs.outputFileSync(servicePath(className), service)
 }

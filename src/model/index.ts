@@ -1,11 +1,9 @@
-import fs from 'fs-extra'
-import { resolve, join } from 'path'
-import { parse } from 'csv-parse/sync'
-import camelcase from 'camelcase'
+import { outputFileSync } from 'fs-extra'
 import { State } from '../State'
+import { modelPath } from '../dirUtils'
 
-export function saveModel(state: State, props: Properties) {
-  const fileName = `${props.className}.java`
+export function saveModel(state: State, props: Properties): void {
+  const { className } = props
   let classBody: string[] = Object.assign([], state.properties)
 
   for (let i = 0; i < state.length; i++) {
@@ -15,12 +13,12 @@ export function saveModel(state: State, props: Properties) {
 
   const classTemplate = `@JsonInclude(NON_NULL)
 @JsonIgnoreProperties({"name", "description"})
-public class ${props.className} extends AbstractModel {
+public class ${className} extends AbstractModel {
 // TODO: constructors
 ${classBody.join('\n')}
 // TODO: toString()
 }
 `
-  const outDirPath = join(__dirname, '..', `/generated/model/`)
-  fs.outputFileSync(join(outDirPath, `${fileName}`), classTemplate)
+  // console.log(`${modelPath}/${fileName}`)
+  outputFileSync(modelPath(className), classTemplate)
 }
