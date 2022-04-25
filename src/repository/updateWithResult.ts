@@ -8,7 +8,7 @@ export const updateWithResult = (state: State, props: Properties): string => {
   const placeHolderValues = []
 
   for (let i = 1; i < state.length; i++) {
-    const placeHolderValue = `values.add(item.${getterNames[i]}());`
+    const placeHolderValue = `      values.add(item.${getterNames[i]}());`
     placeHolderValues.push(placeHolderValue)
   }
 
@@ -25,7 +25,7 @@ export const updateWithResult = (state: State, props: Properties): string => {
       final List<Object> values = new ArrayList<>();
       Integer result = null;
 
-      ${placeHolderValues.join('\n')}
+${placeHolderValues.join('\n')}
       values.add(item.getId());
       
       try (Connection cn = getConnection(); PreparedStatement ps = cn.prepareStatement(sb.toString());) {

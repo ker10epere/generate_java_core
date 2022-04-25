@@ -7,9 +7,9 @@ export const list = (state: State, props: Properties) => {
   const conditionals: string[] = []
   const rsGetters: string[] = []
   for (let i = 0; i < state.length; i++) {
-    const conditional = `item.${optionalNames[i]}().ifPresent(listConsumer(sb, "${columns[i]}", values));`
+    const conditional = `        item.${optionalNames[i]}().ifPresent(listConsumer(sb, "${columns[i]}", values));`
 
-    const rsGetter = `final ${dataTypes[i]} ${propertyNames[i]} = rs.get${dataTypes[i]}("${columns[i]}");`
+    const rsGetter = `                final ${dataTypes[i]} ${propertyNames[i]} = rs.get${dataTypes[i]}("${columns[i]}");`
 
     conditionals.push(conditional)
     rsGetters.push(rsGetter)
@@ -31,7 +31,7 @@ export const list = (state: State, props: Properties) => {
 
         final List<Object> values = new ArrayList<>();
 
-        ${conditionals.join('\n')}
+${conditionals.join('\n')}
 
         final List<${className}> list = new ArrayList<>();
         ResultSet rs = null;
@@ -40,7 +40,7 @@ export const list = (state: State, props: Properties) => {
             sql(ps);
             rs = ps.executeQuery();
             while (rs.next()) {
-                ${joinRsGetters}
+${joinRsGetters}
                 
                 list.add(new ${className}(${joinedPropertyNames});
             }

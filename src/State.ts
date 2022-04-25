@@ -29,16 +29,13 @@ export class State {
       const property = `  private  ${dataType}  ${propertyName};`
       const setterMethod = `  public void ${setterName}(${dataType} ${propertyName}) {
     this.${propertyName} = ${propertyName};
-  }
-  `
+  }`
       const getterMethod = `  public ${dataType} ${getterName}() {
     return ${propertyName};
-  }
-  `
+  }`
       const optionalMethod = `  public Optional< ${dataType} > ${optionalName}() {
     return Optional.ofNullable(${propertyName});
-  }
-  `
+  }`
 
       this._columns.push(column)
       this._properties.push(property)

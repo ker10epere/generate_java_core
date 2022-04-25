@@ -7,13 +7,13 @@ import {
 } from './nameUtils'
 
 const modelPath = (className: string): string =>
-  join(__dirname, '..', `/generated/model`, `${className}.java`)
+  join(__dirname, '..', `/generated/${className}/model`, `${className}.java`)
 
 const repoPath = (className: string): string =>
   join(
     __dirname,
     '..',
-    `/generated/repository`,
+    `/generated/${className}/repository`,
     `${getRepositoryName(className)}.java`
   )
 
@@ -21,7 +21,7 @@ const repoImplPath = (className: string): string =>
   join(
     __dirname,
     '..',
-    `/generated/repository/impl`,
+    `/generated/${className}/repository/impl`,
     `${getRepositoryImplName(className)}.java`
   )
 
@@ -29,7 +29,7 @@ const servicePath = (className: string): string =>
   join(
     __dirname,
     '..',
-    `/generated/service`,
+    `/generated/${className}/service`,
     `${getServiceName(className)}.java`
   )
 
@@ -37,7 +37,7 @@ const serviceImplPath = (className: string): string =>
   join(
     __dirname,
     '..',
-    `/generated/service/impl`,
+    `/generated/${className}/service/impl`,
     `${getServiceImplName(className)}.java`
   )
 

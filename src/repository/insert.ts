@@ -7,7 +7,7 @@ export const insert = (state: State, props: Properties): string => {
   const placeHolderValues = []
   for (let i = 1; i < state.length; i++) {
     noIdColumns.push(columns[i])
-    const placeHolderValue = `values.add(item.${getterNames[i]}());`
+    const placeHolderValue = `        values.add(item.${getterNames[i]}());`
     placeHolderValues.push(placeHolderValue)
   }
 
@@ -26,7 +26,7 @@ export const insert = (state: State, props: Properties): string => {
         final List<Object> values = new ArrayList<>();
         Integer result;
 
-        ${placeHolderValues.join('\n')}
+${placeHolderValues.join('\n')}
 
         try (Connection cn = getConnection(); PreparedStatement ps = cn.prepareStatement(sb.toString());) {
             SetPreparedStatement.set(ps, values);
