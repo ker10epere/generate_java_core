@@ -35,6 +35,7 @@ ${placeHolderValues.join('\n')}
             rs = ps.executeQuery();
             rs.next();
             id = rs.getLong("id");
+            debug("Id = " + id);
         } catch (Throwable e) {
             String throwables = ThrowableUtils.stringifyThrowables(e.getSuppressed());
             error(throwables);
