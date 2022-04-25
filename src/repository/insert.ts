@@ -22,22 +22,28 @@ export const insert = (state: State, props: Properties): string => {
                 .append(tableName)
                 .append(" ( ${joinedColumns} ) ")
                 .append(" VALUES ")
-                .append(" ( ${joinedValues} ) ");
+                .append(" ( ${joinedValues} )  RETURNING id ");
         final List<Object> values = new ArrayList<>();
-        Integer result;
+        Long id = null;
+        ResultSet rs = null;
 
 ${placeHolderValues.join('\n')}
 
         try (Connection cn = getConnection(); PreparedStatement ps = cn.prepareStatement(sb.toString());) {
             SetPreparedStatement.set(ps, values);
             sql(ps);
-            result = ps.executeUpdate();
-            debug("result = " + result);
+            ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
+            while (rs.next()) {
+                id = rs.getLong("id");
+            }
         } catch (Throwable e) {
             String throwables = ThrowableUtils.stringifyThrowables(e.getSuppressed());
             error(throwables);
             throw e;
-        }
-        return null;
+        } finally {
+          if (rs != null) rs.close();
+      }
+        return new ${className}(id);
     }`
 }
