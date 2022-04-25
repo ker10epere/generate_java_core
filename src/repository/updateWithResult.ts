@@ -20,7 +20,7 @@ export const updateWithResult = (state: State, props: Properties): string => {
               .append("UPDATE ")
               .append(tableName)
               .append(
-" ${coalesce(state)} ")
+" SET ${coalesce(state)} ")
               .append(" WHERE id = ? ");
       final List<Object> values = new ArrayList<>();
       Integer result = null;
