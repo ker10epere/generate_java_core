@@ -32,7 +32,7 @@ ${placeHolderValues.join('\n')}
         try (Connection cn = getConnection(); PreparedStatement ps = cn.prepareStatement(sb.toString());) {
             SetPreparedStatement.set(ps, values);
             sql(ps);
-            ps.executeUpdate();
+            ps.execute();
             rs = ps.getGeneratedKeys();
             while (rs.next()) {
                 id = rs.getLong("id");
