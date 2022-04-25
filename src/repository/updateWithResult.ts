@@ -14,7 +14,7 @@ export const updateWithResult = (state: State, props: Properties): string => {
 
   return `
   @Override
-  public Integer updateWithResult(Client item) throws ClassNotFoundException, SQLException, NamingException {
+  public Integer updateWithResult(${className} item) throws ClassNotFoundException, SQLException, NamingException {
       debug(item);
       final StringBuilder sb = new StringBuilder()//
               .append("UPDATE ")
