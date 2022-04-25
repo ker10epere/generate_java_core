@@ -19,10 +19,11 @@ export const updateWithResult = (state: State, props: Properties): string => {
       final StringBuilder sb = new StringBuilder()//
               .append("UPDATE ")
               .append(tableName)
-              .append(" ${coalesce(state)} ")
+              .append(
+" ${coalesce(state)} ")
               .append(" WHERE id = ? ");
       final List<Object> values = new ArrayList<>();
-      Integer result;
+      Integer result = null;
 
       ${placeHolderValues.join('\n')}
       values.add(item.getId());
