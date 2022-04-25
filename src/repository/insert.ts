@@ -16,6 +16,7 @@ export const insert = (state: State, props: Properties): string => {
 
   return `@Override
     public ${className} insert(${className} item) throws ClassNotFoundException, SQLException, NamingException {
+      // TODO: fix values.add getStatus() to getStatus().getDescription()
         debug(item);
         final StringBuilder sb = new StringBuilder()//
                 .append("INSERT INTO ")

@@ -15,6 +15,7 @@ export const updateWithResult = (state: State, props: Properties): string => {
   return `
   @Override
   public Integer updateWithResult(${className} item) throws ClassNotFoundException, SQLException, NamingException {
+      // TODO: fix values.add getStatus() to getStatus().getDescription()
       debug(item);
       final StringBuilder sb = new StringBuilder()//
               .append("UPDATE ")
