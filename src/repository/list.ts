@@ -42,7 +42,7 @@ ${conditionals.join('\n')}
             while (rs.next()) {
 ${joinRsGetters}
                 
-                list.add(new ${className}(${joinedPropertyNames});
+                list.add(new ${className}(${joinedPropertyNames}));
             }
 
         } catch (Throwable e) {
