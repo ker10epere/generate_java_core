@@ -14,6 +14,6 @@ interface ClassModel {
 }
 interface Properties {
   tableName: string
-  fileClassName: string
   className: string
+  // fileClassName: string
 }

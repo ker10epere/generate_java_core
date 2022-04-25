@@ -7,7 +7,7 @@ const file = 'table'
 // const columns: String[] = readFileSync(file, 'utf-8').split(/\r?\n/)
 // const tableName = columns.shift()
 
-export const updateRepo = (columns: string[], tableName: string): string => {
+export const coalesce = (columns: string[], tableName: string): string => {
   const coalesce = columns
     .reduce((acc, curr) => {
       return [...acc, ` ${curr} = COALESCE( ? , ${curr} ) `]

@@ -1,10 +1,10 @@
 import { readFileSync } from 'fs'
 import { resolve, join } from 'path'
 import { parse } from 'csv-parse/sync'
-import saveRepo from './generate_repo'
-import { saveClass } from './generate-model'
-import saveService from './generate_service'
-import { updateRepo } from './coalesce/update_repo'
+import { coalesce } from './repository/coalesce'
+import { outputFileSync } from 'fs-extra'
+import { State } from './State'
+import { saveModel } from './model'
 
 const properties = JSON.parse(
   readFileSync('properties.json', 'utf8')
@@ -15,14 +15,18 @@ const columns = readFileSync(file, 'utf-8')
 const databaseColumns: Data[] = parse(columns, {
   delimiter: ',',
   columns: true,
+  comment: '#',
 })
 
-const update = updateRepo(
-  databaseColumns.map((i) => i.columnName),
-  properties.tableName
-)
+const state = new State(databaseColumns)
 
-console.log(update)
+// saveModel(state, properties)
+
+// console.log(state.columns)
+// console.log(state.properties)
+// console.log(state.getters)
+// console.log(state.setters)
+// console.log(state.optionals)
 // saveRepo(databaseColumns, properties)
 // saveClass(databaseColumns, properties)
 // saveService(properties)

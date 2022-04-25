@@ -1,5 +1,4 @@
 {
   "tableName": "clients",
-  "fileClassName": "client",
   "className": "Client"
 }

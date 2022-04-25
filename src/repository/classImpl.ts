@@ -1,6 +1,6 @@
 import { list } from './list'
 
-export const repoClassImpl = (
+export const classImpl = (
   properties: Properties,
   columnNamesJoined: string,
   findIsPresentJoined: string,
