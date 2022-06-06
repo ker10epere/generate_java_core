@@ -1,4 +1,4 @@
 {
   "tableName": "recipients",
-  "className": "Recipient"
+  "className": "Recipient" 
 }
